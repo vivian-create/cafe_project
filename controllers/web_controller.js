@@ -15,6 +15,9 @@ export const cafeinfo = (req, res) => {
     var sql1 = "select * from cafe_info where cafe_name = '"+ cafe_name+"'"; 
     var sql2 = "select * from cafe_info_drink where cafe_name = '"+ cafe_name+"'";
     var sql3 = "select * from cafe_info_meal where cafe_name = '"+ cafe_name+"'";
+    var result1={};
+    var result2={};
+    var result3={};
     var connection = new Connection(config);
     connection.on('connect',err => {
         if(err) console.log(err);
@@ -29,9 +32,7 @@ export const cafeinfo = (req, res) => {
             if(err) console.log(err);
         });
         var result={};
-        var result1={};
-        var result2={};
-        var result3={};
+        
         var i=0;
 
         Request1.on('prepared', ()=> { 
@@ -104,18 +105,20 @@ export const cafeinfo = (req, res) => {
             console.log("result3 = ", result3); 
         });
         
-        Request3.on('requestCompleted',()=>{
-            res.render('cafe_info',{result1,result2,result3});
-        });
-
         connection.execSql(Request3);
 
     })
-   
+
+    connection.on('end',()=>{
+        res.render('cafe_info',{result1,result2,result3});
+    });
+    connection.connect();
+    connection.close();
 }
 export const studypage = (req, res) => {
     var sql = "select * from study_page"; 
     var connection = new Connection(config);
+    var results={};
     connection.on('connect',err => {
         if(err) console.log(err);
         console.log('MSSQL connected');
@@ -144,15 +147,17 @@ export const studypage = (req, res) => {
             console.log("results = ", results); 
         });
 
-        Request3.on('requestCompleted',()=>{
-            res.render('study_page',{results});
-        });
         connection.execSql(Request);
     });
- 
+    connection.on('end',()=>{
+        res.render('study_page',{results});
+    });
+    connection.connect();
+    connection.close();
 }
 export const chatpage = (req, res) => {
     var sql = "select * from chat_page"; 
+    var results={};
     connection.on('connect',err => {
         if(err) console.log(err);
         console.log('MSSQL connected');
@@ -181,16 +186,19 @@ export const chatpage = (req, res) => {
             console.log("results = ", results); 
         });
 
-        Request3.on('requestCompleted',()=>{
-            res.render('chat_page',{results});
-        });
         connection.execSql(Request);
     });
-  
+
+    connection.on('end',()=>{
+        res.render('chat_page',{results});
+    });
+    connection.connect();
+    connection.close();
 }
 export const countryResult = (req, res) => {
     var country_name = req.body.country;
     var sql = "select * from country_result where addr like '%"+country_name+"%'"; 
+    var results;
     connection.on('connect',err => {
         if(err) console.log(err);
         console.log('MSSQL connected');
@@ -219,10 +227,12 @@ export const countryResult = (req, res) => {
             console.log("results = ", results); 
         });
 
-        Request3.on('requestCompleted',()=>{
-            res.render('country_result',{results,country_name});
-        });
         connection.execSql(Request);
     });
+    connection.on('end',()=>{
+        res.render('country_result',{results,country_name});
+    });
+    connection.connect();
+    connection.close();
 }
 

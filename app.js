@@ -67,6 +67,7 @@ var connection = new Connection(config);
 connection.on('connect',err => {
     if(err) console.log(err);
     console.log('MSSQL connected');
+    connection.close();
 });
 
 connection.connect();
