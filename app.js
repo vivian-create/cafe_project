@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import sql from "mssql";
 import usersRoutes from "./routes/users.js";
 import engine from 'ejs-locals';
+import { Connection,Request } from "tedious";
+
 
 const app = express();
 const port = process.env.PORT||5000;
@@ -35,29 +37,20 @@ app.set('view engine', 'ejs');
 
 //// Listen on Port 5000
 app.listen(port, () => console.info(`App listening on port ${port}`));
-// var config = {  
-//     server: '140.136.151.128',
-//     authentication: {
-//         type: 'default',
-//         options: {
-//             userName: 'vivian',
-//             password: 'Apple0927399339'
-//         }
-//     },
-//     options: {
-//         database: 'cafedB',
-//         port: 1433  //your port number
-//     }
-// }; 
+export var config = {  
+    server: 'cafe0927399.database.windows.net',
+    authentication: {
+        type: 'default',
+        options: {
+            userName: 'Apple',
+            password: ' idiotjelly890528@'
+        }
+    },
+    options: {
+        database: 'cafedB',
+    }
+}; 
 // 123
-export var config={
-    user:'Apple',
-    password:'idiotjelly890528@',
-    server:'cafe0927399.database.windows.net',   
-    database:'cafedB',
-    port: 1433,
-    trustServerCertificate: true,
-};
 // export var config={
 //     user:'vivian',
 //     password:'Apple0927399@',
@@ -68,8 +61,12 @@ export var config={
 // };
 
 //export var db = new sql.Request();
-sql.connect(config,function (err) {
+
+var connection = new Connection(config);
+
+connection.on('connect',err => {
     if(err) console.log(err);
     console.log('MSSQL connected');
-   
-})
+});
+
+connection.connect();
