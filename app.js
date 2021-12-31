@@ -61,7 +61,7 @@ app.listen(port, () => console.info(`App listening on port ${port}`));
 export var config={
     user:'vivian',
     password:'Apple0927399@',
-    server:'WIN-95TIN43A665\SQLEXPRESS',   
+    server:'localhost\SQLEXPRESS',   
     database:'cafedB',
     port: 1433,
     trustServerCertificate: true,
