@@ -16,7 +16,8 @@
     "ejs-locals": "^1.0.2",
     "express": "^4.17.2",
     "gift": "^0.10.2",
-    "mssql": "^7.3.0"
+    "mssql": "^7.3.0",
+    "tedious": "^14.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
