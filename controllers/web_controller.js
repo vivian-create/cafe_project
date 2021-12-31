@@ -22,25 +22,25 @@ export const cafeinfo = (req, res) => {
     connection.on('connect',err => {
         if(err) console.log(err);
         console.log('MSSQL connected');
-        var Request1 = new Request(sql1,err => {
+        var request1 = new Request(sql1,err => {
             if(err) console.log(err);
         });
-        var Request2 = new Request(sql2,err => {
+        var request2 = new Request(sql2,err => {
             if(err) console.log(err);
         });
-        var Request3 = new Request(sql3,err => {
+        var request3 = new Request(sql3,err => {
             if(err) console.log(err);
         });
         var result={};
         
         var i=0;
 
-        Request1.on('prepared', ()=> { 
+        request1.on('prepared', ()=> { 
             result={};
             i=0;
         });
 
-        Request1.on('row', function(columns) {  
+        request1.on('row', function(columns) {  
             result[i]={};
             columns.forEach(function(column) {  
               if (column.value === null) {  
@@ -52,19 +52,19 @@ export const cafeinfo = (req, res) => {
             i++;  
         });
 
-        Request1.on('done', function(rowCount, more) {  
+        request1.on('done', function(rowCount, more) {  
             result1=JSON.parse(JSON.stringify(result[0]));
             console.log("result1 = ", result1); 
         });
         
-        connection.execSql(Request1);
+        connection.execSql(request1);
 
         Request2.on('prepared', () => { 
             result={};
             i=0;
         });
 
-        Request2.on('row', function(columns) {  
+        request2.on('row', function(columns) {  
             result[i]={};
             columns.forEach(function(column) {  
               if (column.value === null) {  
@@ -76,19 +76,19 @@ export const cafeinfo = (req, res) => {
             i++;  
         });
 
-        Request2.on('done', function(rowCount, more) {  
+        request2.on('done', function(rowCount, more) {  
             result2=JSON.parse(JSON.stringify(result));
             console.log("result2 = ", result2); 
         });
         
-        connection.execSql(Request2);
+        connection.execSql(request2);
 
-        Request3.on('prepared', () => { 
+        request3.on('prepared', () => { 
             result={};
             i=0;
         });
 
-        Request3.on('row', function(columns) {  
+        request3.on('row', function(columns) {  
             result[i]={};
             columns.forEach(function(column) {  
               if (column.value === null) {  
@@ -100,12 +100,12 @@ export const cafeinfo = (req, res) => {
             i++;  
         });
 
-        Request3.on('done', function(rowCount, more) {  
+        request3.on('done', function(rowCount, more) {  
             result3=JSON.parse(JSON.stringify(result));
             console.log("result3 = ", result3); 
         });
         
-        connection.execSql(Request3);
+        connection.execSql(request3);
 
     })
 
@@ -126,11 +126,11 @@ export const studypage = (req, res) => {
         var result={};
         var i=0;
 
-        var Request = new Request(sql,err => {
+        var request = new Request(sql,err => {
             if(err) console.log(err);
         });
 
-        Request.on('row', function(columns) {  
+        request.on('row', function(columns) {  
             result[i]={};
             columns.forEach(function(column) {  
               if (column.value === null) {  
@@ -142,12 +142,12 @@ export const studypage = (req, res) => {
             i++;  
         });
 
-        Request.on('done', function(rowCount, more) {  
+        request.on('done', function(rowCount, more) {  
             results=JSON.parse(JSON.stringify(result));
             console.log("results = ", results); 
         });
 
-        connection.execSql(Request);
+        connection.execSql(request);
     });
     connection.on('end',()=>{
         res.render('study_page',{results});
@@ -165,11 +165,11 @@ export const chatpage = (req, res) => {
         var result={};
         var i=0;
 
-        var Request = new Request(sql,err => {
+        var request = new Request(sql,err => {
             if(err) console.log(err);
         });
 
-        Request.on('row', function(columns) {  
+        request.on('row', function(columns) {  
             result[i]={};
             columns.forEach(function(column) {  
               if (column.value === null) {  
@@ -181,12 +181,12 @@ export const chatpage = (req, res) => {
             i++;  
         });
 
-        Request.on('done', function(rowCount, more) {  
+        request.on('done', function(rowCount, more) {  
             results=JSON.parse(JSON.stringify(result));
             console.log("results = ", results); 
         });
 
-        connection.execSql(Request);
+        connection.execSql(request);
     });
 
     connection.on('end',()=>{
@@ -206,11 +206,11 @@ export const countryResult = (req, res) => {
         var result={};
         var i=0;
 
-        var Request = new Request(sql,err => {
+        var request = new Request(sql,err => {
             if(err) console.log(err);
         });
 
-        Request.on('row', function(columns) {  
+        request.on('row', function(columns) {  
             result[i]={};
             columns.forEach(function(column) {  
               if (column.value === null) {  
@@ -222,12 +222,12 @@ export const countryResult = (req, res) => {
             i++;  
         });
 
-        Request.on('done', function(rowCount, more) {  
+        request.on('done', function(rowCount, more) {  
             results=JSON.parse(JSON.stringify(result));
             console.log("results = ", results); 
         });
 
-        connection.execSql(Request);
+        connection.execSql(request);
     });
     connection.on('end',()=>{
         res.render('country_result',{results,country_name});
