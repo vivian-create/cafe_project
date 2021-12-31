@@ -50,22 +50,22 @@ app.listen(port, () => console.info(`App listening on port ${port}`));
 //     }
 // }; 
 // 123
-// export var config={
-//     user:'Apple',
-//     password:'idiotjelly890528@',
-//     server:'cafe0927399.database.windows.net',   
-//     database:'cafedB',
-//     port: 1433,
-//     trustServerCertificate: true,
-// };
 export var config={
-    user:'vivian',
-    password:'Apple0927399@',
-    server:'localhost\\SQLEXPRESS',   
+    user:'Apple',
+    password:'idiotjelly890528@',
+    server:'cafe0927399.database.windows.net',   
     database:'cafedB',
     port: 1433,
     trustServerCertificate: true,
 };
+// export var config={
+//     user:'vivian',
+//     password:'Apple0927399@',
+//     server:'localhost\\SQLEXPRESS',   
+//     database:'cafedB',
+//     port: 1433,
+//     trustServerCertificate: true,
+// };
 
 //export var db = new sql.Request();
 sql.connect(config,function (err) {
