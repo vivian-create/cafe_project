@@ -43,7 +43,7 @@ export var config = {
         type: 'default',
         options: {
             userName: 'Apple',
-            password: ' idiotjelly890528@'
+            password: 'idiotjelly890528@'
         }
     },
     options: {
