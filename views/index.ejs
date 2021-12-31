@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>咖啡廳介紹</title><br><br>
+    <h1 align=center><font face="monospace"><font size="20"><b>咖啡廳介紹</font></h1>
+    <meta charset="utf-8">
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+  </script>
+  <script> 
+      $(document).ready(function(){
+      $("#flip").click(function(){
+      $("#panel").slideToggle("slow");
+    });
+  });
+  </script>
+  <style type="text/css"> 
+  #panel,#flip
+  {
+	padding:5px;
+	text-align:center;
+	background-color:#FFECC9;
+	border:solid 1px #FFF3DE;
+  }
+  #panel
+  {
+	  padding:5px;
+	  display:none;
+  }
+  </style>
+	  
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	  
+  </head>
+ 
+  <body>
+    <br>
+    <center>
+	 <button style="font-size:20px;" type="button" onclick="location.href='/country_page'" class="btn btn-sm btn-outline-secondary">縣市搜尋</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button style="font-size:20px;" type="button" onclick="location.href='/study_page'" class="btn btn-sm btn-outline-secondary">適合讀書</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	 <button style="font-size:20px;" type="button" onclick="location.href='/chat_page'" class="btn btn-sm btn-outline-secondary">適合聊天</button>
+    </center>
+      <br><br>
+      <div id="flip"><b>立刻搜尋想去的咖啡廳 click me !</b></div>
+	  
+	<div id="panel"> <center>                     
+	  <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d57830.7447864984!2d121.50622348090579!3d25.053697503321107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z5Y-w5YyX5ZKW5ZWh5buz!5e0!3m2!1szh-TW!2stw!4v1608591321214!5m2!1szh-TW!2stw" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+	  </center>
+		</div>
+	
+	  <br><br>
+	  <center><a href = "https://www.youtube.com/watch?v=1JFZvCh0EXI">咖啡豆種類</a></center>
+	    <center><img src="https://i.imgur.com/ph6sMMD.gif" width="450" height="300"></center><br>
+	  <center><a href = "https://www.youtube.com/watch?v=cfkoDwJKhNo">咖啡深焙淺焙差異</a></center><br>
+	    <center><img src="https://i.imgur.com/IjbfKeb.jpg" width="450" height="300"></center><br>
+	  <center><a href = "https://www.youtube.com/watch?v=Znn2hlM4nOQ">咖啡飲品種類</a></center><br>
+	    <center><img src="https://i.imgur.com/mpziqXq.jpg" width="" height="300"></center><br><br>
+
+	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	  
+   </body>
+</html>
+
+<style>
+   body 
+    {
+    font-family:"monospace" ;
+    background-image: url(https://i.imgur.com/XQK1x7c.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    }
+</style>

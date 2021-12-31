@@ -1,0 +1,56 @@
+<css>
+<style>
+   body 
+    {
+    font-family: "monospace" ;
+    background-image: url(https://i.imgur.com/XQK1x7c.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    }
+</style>
+</css>
+
+<html>
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<body>
+   <center>
+      </br>
+      <a href="/">  <button  style="font-size:15px;" type="button" class="btn btn-sm btn-outline-secondary">首頁</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <a href="javascript:history.back()"><button style="font-size:15px;" type="button" class="btn btn-sm btn-outline-secondary">回上一頁</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+       </br>
+     </br>
+<table width="800" border="1" height="200">  
+  <tr><td>
+    <b>店名：</b><%= result1.cafe_name %></br>
+    <b>地址：</b><%= result1.addr %></br>
+    <div><img src="https://i.imgur.com/zFfFnsw.jpg" id="img1" width="400" hight="400">
+    </br>
+    <b>餐點：</b></br>
+    ❣️<%= result2[0].drink_name%><%= result2[0].drink_price %></br>
+    </br>
+    ❣️<%= result2[1].drink_name%><%= result2[1].drink_price %></br>
+    </br>
+    ❣️<%= result3[0].meal_name%><%= result3[0].meal_price %></br>
+    </br>
+    ❣️<%= result3[1].meal_name%><%= result3[1].meal_price %></br>
+    </br>
+    </br>
+    <b>環境：</b><%= result1.enviroment %>
+    </br>
+    </br>
+    有無低消：<%= result1.min_order %></br>
+    有無限時：<%= result1.time_limit %></br>
+    </br>
+    營業時間：<%= result1.open_hour %></br>
+    整體評價：<%= result1.score %></br>
+    電話：<%= result1.telephone %></br>
+  </p> 
+</td></tr></table>
+</center>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

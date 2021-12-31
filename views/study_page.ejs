@@ -1,0 +1,116 @@
+
+
+<html>
+   <head>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <css>
+<style>
+   body 
+    {
+    font-family:"monospace" ;
+    background-image: url(https://i.imgur.com/XQK1x7c.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    }
+</style>
+</css>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="../jquery.simplePagination.js"></script>
+<script src="http://tablesorter.com/addons/pager/jquery.tablesorter.pager.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery-tablepage.js"></script>
+<link href="../simplePagination.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+   $(document).ready(function() { 
+      $("#tbl").tablepage($("#table_page"), 10);
+}); 
+
+   </script>
+<title>咖啡廳-讀書首選📚</title>
+</head>
+<body> 
+ 
+<div class ="header">
+   <br></br>
+ <h1><center><font size="20"><b>讀書首選📚</font></h1>
+    <br>
+    <center>
+       <a href="/"><button style="font-size:px;" type="button" class="btn btn-sm btn-outline-secondary">回上一頁</button></a>
+     </br>
+   
+ </div>
+   <center>
+   <table id="tb1"   border="0" >
+      <tbody>
+   <% var length = results.length %>
+   <% for(var i=0;i < length;i=i+2){ %> 
+      <% var j = i %>
+      <% if(i==0) j="" %>
+　<tr>
+    <td>
+   
+    <div class="main"+j>
+ 
+       
+    <ul>
+   <br></br>
+    <li>店名：<%= results[i].cafe_name%></li>
+
+    <li>地址：<%= results[i].addr%></li>
+    <li>
+        <form action="/studycafe_info" method="post" >
+         <input type="hidden" id="<%= results[i].cafe_name %>" name="cafe_name" value="<%= results[i].cafe_name %>">
+           <button style="font-size:px;" type="submit" class="btn btn-sm btn-outline-secondary">GO!</button>
+        </form>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      </li>
+    </ul>
+      </div>
+      </td>
+    <td>
+     
+    <div class="pic"+j>
+  
+    
+     <img src="https://i.imgur.com/QOYMfDl.png" id="img"+j width="200" hight="200">
+     </div> 
+      </td>
+   <% if(i+1 < length){ %>
+    <td>
+    <div class="main"+(j+1)>
+     <ul>
+      <br></br>
+    <li>店名：<%= results[i+1].cafe_name%></li>
+      <li>地址：<%= results[i+1].addr%></li>
+       <li>
+          <form action="/studycafe_info" method="post" >
+            <input type="hidden" id="<%= results[i+1].cafe_name %>" name="cafe_name" value="<%= results[i+1].cafe_name %>">
+             <button style="font-size:px;" type="submit" class="btn btn-sm btn-outline-secondary">GO!</button>
+         </form>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+         </li>
+      </ul>
+       </div>
+      </td>
+
+    <td>
+       <div class="pic"+(j+1)>
+       <img src="https://i.imgur.com/zpZhpy7.jpg" id="img"+(j+1) width="200" hight="200">
+       </div>
+   </td>
+   <% } %>
+   </tr>
+
+   <% } %>
+   </tbody>
+</table>
+<span id='table_page'></span>
+</br>
+</br>
+
+</body>
+  
+</html>
