@@ -51,6 +51,7 @@ export const cafeinfo = (req, res) => {
 
         request1.on('requestCompleted', ()=> {  
             result1=JSON.parse(JSON.stringify(result[0]));
+            result=[];
             console.log("result1 = ", result1);
             connection.execSql(request2); 
         });
@@ -77,6 +78,7 @@ export const cafeinfo = (req, res) => {
 
         request2.on('requestCompleted', ()=> {  
             result2=JSON.parse(JSON.stringify(result));
+            result=[];
             console.log("result2 = ", result2); 
             connection.execSql(request3);
         });
