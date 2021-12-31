@@ -31,87 +31,84 @@ export const cafeinfo = (req, res) => {
         var request3 = new Request(sql3,err => {
             if(err) console.log(err);
         });
-        var result={};
-        
-        var i=0;
+        var result=[];
 
         request1.on('prepared', ()=> { 
-            result={};
-            i=0;
+            result=[];
         });
 
         request1.on('row', function(columns) {  
-            result[i]={};
+            var row={};  
             columns.forEach(function(column) {  
-              if (column.value === null) {  
-                console.log('NULL');  
-              } else {  
-                result[i][column.metadata.colName]=column.value;
-              }  
-            });
-            i++;  
+                if (column.value === null) {  
+                  console.log('NULL');  
+                } else {  
+                  row[column.metadata.colName]=column.value;
+                }  
+              });
+            result.push(row);  
         });
 
-        request1.on('done', function(rowCount, more) {  
+        request1.on('requestCompleted', ()=> {  
             result1=JSON.parse(JSON.stringify(result[0]));
-            console.log("result1 = ", result1); 
+            console.log("result1 = ", result1);
+            connection.execSql(request2); 
         });
         
         connection.execSql(request1);
 
-        Request2.on('prepared', () => { 
-            result={};
-            i=0;
+        request2.on('prepared', () => { 
+            result=[];
         });
 
         request2.on('row', function(columns) {  
-            result[i]={};
+            var row={};  
             columns.forEach(function(column) {  
-              if (column.value === null) {  
-                console.log('NULL');  
-              } else {  
-                result[i][column.metadata.colName]=column.value;
-              }  
-            });
-            i++;  
+                if (column.value === null) {  
+                  console.log('NULL');  
+                } else {  
+                  row[column.metadata.colName]=column.value;
+                }  
+              });
+            result.push(row);   
         });
 
-        request2.on('done', function(rowCount, more) {  
+        
+
+        request2.on('requestCompleted', ()=> {  
             result2=JSON.parse(JSON.stringify(result));
             console.log("result2 = ", result2); 
+            connection.execSql(request3);
         });
         
-        connection.execSql(request2);
+        
 
         request3.on('prepared', () => { 
-            result={};
-            i=0;
+            result=[];
         });
 
         request3.on('row', function(columns) {  
-            result[i]={};
+            var row={};  
             columns.forEach(function(column) {  
-              if (column.value === null) {  
-                console.log('NULL');  
-              } else {  
-                result[i][column.metadata.colName]=column.value;
-              }  
-            });
-            i++;  
+                if (column.value === null) {  
+                  console.log('NULL');  
+                } else {  
+                  row[column.metadata.colName]=column.value;
+                }  
+              });
+            result.push(row); 
         });
 
-        request3.on('done', function(rowCount, more) {  
+        request3.on('requestCompleted', ()=> {  
             result3=JSON.parse(JSON.stringify(result));
             console.log("result3 = ", result3); 
+            res.render('cafe_info',{result1,result2,result3});
         });
         
-        connection.execSql(request3);
+        
 
     })
 
-    connection.on('end',()=>{
-        res.render('cafe_info',{result1,result2,result3});
-    });
     connection.connect();
     connection.close();
 }
@@ -123,8 +120,7 @@ export const studypage = (req, res) => {
         if(err) console.log(err);
         console.log('MSSQL connected');
 
-        var result={};
-        var i=0;
+        var result=[];
 
         var request = new Request(sql,err => {
             if(err) console.log(err);
@@ -132,29 +128,25 @@ export const studypage = (req, res) => {
         });
 
         request.on('row', function(columns) {
-            result[i]={};  
+            var row={};  
             columns.forEach(function(column) {  
                 if (column.value === null) {  
                   console.log('NULL');  
                 } else {  
-                  result[i][column.metadata.colName]=column.value;
+                  row[column.metadata.colName]=column.value;
                 }  
               });
-            
-            i++;  
+            result.push(row);  
         });
 
         request.on('requestCompleted',()=>{
             
             results=JSON.parse(JSON.stringify(result));
             console.log("results = ", results);
+            res.render('study_page',{results});
         })
         connection.execSql(request);
 
-    });
-    connection.on('end',()=>{
-
-        res.render('study_page',{results});
     });
     connection.connect();
     connection.close();
@@ -166,36 +158,34 @@ export const chatpage = (req, res) => {
         if(err) console.log(err);
         console.log('MSSQL connected');
 
-        var result={};
-        var i=0;
+        var result=[];
+
 
         var request = new Request(sql,err => {
             if(err) console.log(err);
         });
 
         request.on('row', function(columns) {  
-            result[i]={};
+            var row={};  
             columns.forEach(function(column) {  
-              if (column.value === null) {  
-                console.log('NULL');  
-              } else {  
-                result[i][column.metadata.colName]=column.value;
-              }  
-            });
-            i++;  
+                if (column.value === null) {  
+                  console.log('NULL');  
+                } else {  
+                  row[column.metadata.colName]=column.value;
+                }  
+              });
+            result.push(row);  
         });
 
-        request.on('done', function(rowCount, more) {  
+        request.on('requestCompleted',()=>{  
             results=JSON.parse(JSON.stringify(result));
-            console.log("results = ", results); 
+            console.log("results = ", results);
+            res.render('chat_page',{results}); 
         });
 
         connection.execSql(request);
     });
 
-    connection.on('end',()=>{
-        res.render('chat_page',{results});
-    });
     connection.connect();
     connection.close();
 }
@@ -207,7 +197,7 @@ export const countryResult = (req, res) => {
         if(err) console.log(err);
         console.log('MSSQL connected');
 
-        var result={};
+        var result=[];
         var i=0;
 
         var request = new Request(sql,err => {
@@ -215,26 +205,24 @@ export const countryResult = (req, res) => {
         });
 
         request.on('row', function(columns) {  
-            result[i]={};
+            var row={};  
             columns.forEach(function(column) {  
-              if (column.value === null) {  
-                console.log('NULL');  
-              } else {  
-                result[i][column.metadata.colName]=column.value;
-              }  
-            });
-            i++;  
+                if (column.value === null) {  
+                  console.log('NULL');  
+                } else {  
+                  row[column.metadata.colName]=column.value;
+                }  
+              });
+            result.push(row);   
         });
 
-        request.on('done', function(rowCount, more) {  
+        request.on('requestCompleted',()=>{  
             results=JSON.parse(JSON.stringify(result));
             console.log("results = ", results); 
+            res.render('country_result',{results,country_name});
         });
 
         connection.execSql(request);
-    });
-    connection.on('end',()=>{
-        res.render('country_result',{results,country_name});
     });
     connection.connect();
     connection.close();
