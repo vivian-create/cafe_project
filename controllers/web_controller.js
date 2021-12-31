@@ -128,28 +128,32 @@ export const studypage = (req, res) => {
 
         var request = new Request(sql,err => {
             if(err) console.log(err);
+            console.log(sql);
         });
 
-        request.on('row', function(columns) {  
-            result[i]={};
+        request.on('row', function(columns) {
+            result[i]={};  
             columns.forEach(function(column) {  
-              if (column.value === null) {  
-                console.log('NULL');  
-              } else {  
-                result[i][column.metadata.colName]=column.value;
-              }  
-            });
+                if (column.value === null) {  
+                  console.log('NULL');  
+                } else {  
+                  result[i][column.metadata.colName]=column.value;
+                }  
+              });
+            
             i++;  
         });
 
-        request.on('done', function(rowCount, more) {  
+        request.on('requestCompleted',()=>{
+            
             results=JSON.parse(JSON.stringify(result));
-            console.log("results = ", results); 
-        });
-
+            console.log("results = ", results);
+        })
         connection.execSql(request);
+
     });
     connection.on('end',()=>{
+
         res.render('study_page',{results});
     });
     connection.connect();
