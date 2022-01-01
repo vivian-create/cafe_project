@@ -37,19 +37,7 @@ app.set('view engine', 'ejs');
 
 //// Listen on Port 5000
 app.listen(port, () => console.info(`App listening on port ${port}`));
-export var config = {  
-    server: 'cafe0927399.database.windows.net',
-    authentication: {
-        type: 'default',
-        options: {
-            userName: 'Apple',
-            password: 'idiotjelly890528@'
-        }
-    },
-    options: {
-        database: 'cafedB',
-    }
-}; 
+
 // 123
 // export var config={
 //     user:'vivian',
@@ -67,7 +55,7 @@ export var db = mysql.createConnection({
     host: 'localhost',
     port: '3306',
     user: 'root',
-    password: 'a12niis',
+    password: 'vivian0927399339@',
     database: 'cafedB'
 })
 
