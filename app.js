@@ -52,11 +52,11 @@ app.listen(port, () => console.info(`App listening on port ${port}`));
 
 
 export var db = mysql.createConnection({
-    host: 'localhost',
+    host: 'us-cdbr-east-05.cleardb.net',
     port: '3306',
-    user: 'root',
-    password: 'vivian0927399339@',
-    database: 'cafedB'
+    user: 'bc19e72cf8e1df',
+    password: 'd486a3c4',
+    database: 'heroku_2bd1108a1123322'
 })
 
 //// Connect to MySQL
