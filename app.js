@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import sql from "mssql";
+import mysql from "mysql";
 import usersRoutes from "./routes/users.js";
 import engine from 'ejs-locals';
 import { Connection,Request } from "tedious";
