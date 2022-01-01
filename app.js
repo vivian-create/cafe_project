@@ -51,7 +51,7 @@ app.listen(port, () => console.info(`App listening on port ${port}`));
 //export var db = new sql.Request();
 
 
-export var db = mysql.createConnection({
+export var pool = mysql.createPool({
     host: 'us-cdbr-east-05.cleardb.net',
     port: '3306',
     user: 'bc19e72cf8e1df',
@@ -60,11 +60,18 @@ export var db = mysql.createConnection({
 })
 
 //// Connect to MySQL
-db.connect(err => {
+pool.getConnection((err,db) => {
     if(err){
         throw err;
     }
     console.log('MySQL connected');
-})
+    db.query("Select 1 from cafe_info",(err,result)=>{
+      if(err){
+        throw err;
+      }
+      db.release();
+    });
+    
+  })
 
 

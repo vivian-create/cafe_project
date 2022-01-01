@@ -1,4 +1,4 @@
-import {db} from '../app.js';
+import {pool} from '../app.js';
 import mssql from "mssql";
 import mysql from "mysql";
 import { Connection,Request } from "tedious";
@@ -19,63 +19,73 @@ export const cafeinfo = (req, res) => {
     var result1={};
     var result2={};
     var result3={};
-
-    db.query(sql1,(err,result)=>{
-        if(err) throw err;
-        result1=JSON.parse(JSON.stringify(result[0]));
-        console.log('result1 = ',result1);
-
-        db.query(sql2,(err,result)=>{
+    pool.getConnection((err,db)=>{
+      if(err) throw err;
+      db.query(sql1,(err,result)=>{
           if(err) throw err;
-          result2=JSON.parse(JSON.stringify(result));
-          console.log('result2 = ',result2);
+          result1=JSON.parse(JSON.stringify(result[0]));
+          console.log('result1 = ',result1);
 
-          db.query(sql3,(err,result)=>{
+          db.query(sql2,(err,result)=>{
             if(err) throw err;
-            result3=JSON.parse(JSON.stringify(result));
-            console.log('result3 = ',result3);
-            res.render('cafe_info',{result1,result2,result3});
+            result2=JSON.parse(JSON.stringify(result));
+            console.log('result2 = ',result2);
+
+            db.query(sql3,(err,result)=>{
+              if(err) throw err;
+              result3=JSON.parse(JSON.stringify(result));
+              console.log('result3 = ',result3);
+              res.render('cafe_info',{result1,result2,result3});
+            });
           });
-        });
+      });
     });
 }
 export const studypage = (req, res) => {
     var sql = "select * from study_page"; 
     
     var results={};
-    
-    db.query(sql,(err,result)=>{
+    pool.getConnection((err,db)=>{
       if(err) throw err;
-      results=JSON.parse(JSON.stringify(result));
-      console.log('result = ',results);
+      db.query(sql,(err,result)=>{
+        if(err) throw err;
+        results=JSON.parse(JSON.stringify(result));
+        console.log('result = ',results);
 
-      res.render('study_page',{results});
+        res.render('study_page',{results});
+      });
     });
 }
 
 export const chatpage = (req, res) => {
     var sql = "select * from chat_page"; 
     var results={};
-    db.query(sql,(err,result)=>{
+    pool.getConnection((err,db)=>{
       if(err) throw err;
-      results=JSON.parse(JSON.stringify(result));
-      console.log('result = ',results);
+      db.query(sql,(err,result)=>{
+        if(err) throw err;
+        results=JSON.parse(JSON.stringify(result));
+        console.log('result = ',results);
 
-      res.render('chat_page',{results});
+        res.render('chat_page',{results});
+      });
     });
 }
+
 export const countryResult = (req, res) => {
     var country_name = req.body.country;
     var sql = "select * from country_result where addr like '%"+country_name+"%'"; 
     var results;
-    db.query(sql,(err,result)=>{
+    pool.getConnection((err,db)=>{
       if(err) throw err;
-      results=JSON.parse(JSON.stringify(result));
-      console.log('result = ',results);
+      db.query(sql,(err,result)=>{
+        if(err) throw err;
+        results=JSON.parse(JSON.stringify(result));
+        console.log('result = ',results);
 
-      res.render('country_result',{results,country_name});
-    });
-            
+        res.render('country_result',{results,country_name});
+      });
+    });   
         
 }
 
