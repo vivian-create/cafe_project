@@ -62,12 +62,21 @@ export var config = {
 
 //export var db = new sql.Request();
 
-var connection = new Connection(config);
 
-connection.on('connect',err => {
-    if(err) console.log(err);
-    console.log('MSSQL connected');
-    connection.close();
-});
+export var db = mysql.createConnection({
+    host: 'localhost',
+    port: '3306',
+    user: 'root',
+    password: 'a12niis',
+    database: 'cafedB'
+})
 
-connection.connect();
+//// Connect to MySQL
+db.connect(err => {
+    if(err){
+        throw err;
+    }
+    console.log('MySQL connected');
+})
+
+
