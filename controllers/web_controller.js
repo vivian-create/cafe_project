@@ -24,6 +24,9 @@ export const cafeinfo = (req, res) => {
       db.query(sql1,(err,result)=>{
           if(err) throw err;
           result1=JSON.parse(JSON.stringify(result[0]));
+          for(let i =0; i<result1.length;i++){
+            result1[i].img = "data:image/png;base64," + Buffer.from(result[i].img).toString('base64url');
+          }
           console.log('result1 = ',result1);
 
           db.query(sql2,(err,result)=>{
@@ -45,11 +48,15 @@ export const studypage = (req, res) => {
     var sql = "select * from study_page"; 
     
     var results={};
+
     pool.getConnection((err,db)=>{
       if(err) throw err;
       db.query(sql,(err,result)=>{
         if(err) throw err;
         results=JSON.parse(JSON.stringify(result));
+        for(let i =0; i<results.length;i++){
+          results[i].img = "data:image/png;base64," + Buffer.from(result[i].img).toString('base64url');
+        }
         console.log('result = ',results);
 
         res.render('study_page',{results});
@@ -65,6 +72,9 @@ export const chatpage = (req, res) => {
       db.query(sql,(err,result)=>{
         if(err) throw err;
         results=JSON.parse(JSON.stringify(result));
+        for(let i =0; i<results.length;i++){
+          results[i].img = "data:image/png;base64," + Buffer.from(result[i].img).toString('base64url');
+        }
         console.log('result = ',results);
 
         res.render('chat_page',{results});
@@ -81,8 +91,11 @@ export const countryResult = (req, res) => {
       db.query(sql,(err,result)=>{
         if(err) throw err;
         results=JSON.parse(JSON.stringify(result));
+        for(let i =0; i<results.length;i++){
+          results[i].img = "data:image/png;base64," + Buffer.from(result[i].img).toString('base64url');
+        }
         console.log('result = ',results);
-
+        
         res.render('country_result',{results,country_name});
       });
     });   
