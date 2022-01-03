@@ -2,7 +2,6 @@ import {pool} from '../app.js';
 import mssql from "mssql";
 import mysql from "mysql";
 import { Connection,Request } from "tedious";
-
 export const homePage = (req, res) => {
     res.render('index');
 }
@@ -16,6 +15,7 @@ export const cafeinfo = (req, res) => {
     var sql1 = "select * from cafe_info where cafe_name = '"+ cafe_name+"'"; 
     var sql2 = "select * from cafe_info_drink where cafe_name = '"+ cafe_name+"'";
     var sql3 = "select * from cafe_info_meal where cafe_name = '"+ cafe_name+"'";
+
     var result1={};
     var result2={};
     var result3={};
@@ -24,11 +24,9 @@ export const cafeinfo = (req, res) => {
       db.query(sql1,(err,result)=>{
           if(err) throw err;
           result1=JSON.parse(JSON.stringify(result[0]));
-          for(let i =0; i<result1.length;i++){
-            result1[i].img = "data:image/png;base64," + Buffer.from(result[i].img).toString('base64url');
-          }
+            if(result[0].img != null)
+              result1.img = Buffer.from(result[0].img,'binary').toString('base64').toString('utf8')
           console.log('result1 = ',result1);
-
           db.query(sql2,(err,result)=>{
             if(err) throw err;
             result2=JSON.parse(JSON.stringify(result));
@@ -45,7 +43,7 @@ export const cafeinfo = (req, res) => {
     });
 }
 export const studypage = (req, res) => {
-    var sql = "select * from study_page"; 
+    var sql = "select * from study_page where img is not null"; 
     
     var results={};
 
@@ -55,7 +53,7 @@ export const studypage = (req, res) => {
         if(err) throw err;
         results=JSON.parse(JSON.stringify(result));
         for(let i =0; i<results.length;i++){
-          results[i].img = "data:image/png;base64," + Buffer.from(result[i].img).toString('base64url');
+          results[i].img = Buffer.from(result[i].img,'binary').toString('base64').toString('utf8');
         }
         console.log('result = ',results);
 
@@ -65,7 +63,7 @@ export const studypage = (req, res) => {
 }
 
 export const chatpage = (req, res) => {
-    var sql = "select * from chat_page"; 
+    var sql = "select * from chat_page where img is not null"; 
     var results={};
     pool.getConnection((err,db)=>{
       if(err) throw err;
@@ -73,7 +71,7 @@ export const chatpage = (req, res) => {
         if(err) throw err;
         results=JSON.parse(JSON.stringify(result));
         for(let i =0; i<results.length;i++){
-          results[i].img = "data:image/png;base64," + Buffer.from(result[i].img).toString('base64url');
+          results[i].img = Buffer.from(result[i].img,'binary').toString('base64').toString('utf8');
         }
         console.log('result = ',results);
 
@@ -84,7 +82,7 @@ export const chatpage = (req, res) => {
 
 export const countryResult = (req, res) => {
     var country_name = req.body.country;
-    var sql = "select * from country_result where addr like '%"+country_name+"%'"; 
+    var sql = "select * from country_result where addr like '%"+country_name+"%' and img is not null"; 
     var results;
     pool.getConnection((err,db)=>{
       if(err) throw err;
@@ -92,7 +90,7 @@ export const countryResult = (req, res) => {
         if(err) throw err;
         results=JSON.parse(JSON.stringify(result));
         for(let i =0; i<results.length;i++){
-          results[i].img = "data:image/png;base64," + Buffer.from(result[i].img).toString('base64url');
+          results[i].img = Buffer.from(result[i].img,'binary').toString('base64').toString('utf8');
         }
         console.log('result = ',results);
         

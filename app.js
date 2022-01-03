@@ -4,7 +4,7 @@ import mysql from "mysql";
 import usersRoutes from "./routes/users.js";
 import engine from 'ejs-locals';
 import { Connection,Request } from "tedious";
-
+import compression from 'compression';
 
 const app = express();
 const port = process.env.PORT||5000;
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
-
+app.use(compression());
 app.use("/", usersRoutes);
 
 
