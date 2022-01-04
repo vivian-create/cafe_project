@@ -83,6 +83,9 @@ export const chatpage = (req, res) => {
 export const countryResult = (req, res) => {
     var country_name = req.body.country;
     var sql = "select * from country_result where addr like '%"+country_name+"%' and img <> 0x00"; 
+    if (country_name == '台中'){
+      sql = "select * from country_result where (addr like '%台中%' or addr like '%新竹%') and img <> 0x00";
+    }
     var results;
     pool.getConnection((err,db)=>{
       if(err) throw err;
