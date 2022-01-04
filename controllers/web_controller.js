@@ -43,7 +43,7 @@ export const cafeinfo = (req, res) => {
     });
 }
 export const studypage = (req, res) => {
-    var sql = "select * from study_page where img is not null"; 
+    var sql = "select * from study_page where img <> 0x00"; 
     
     var results={};
 
@@ -63,7 +63,7 @@ export const studypage = (req, res) => {
 }
 
 export const chatpage = (req, res) => {
-    var sql = "select * from chat_page where img is not null"; 
+    var sql = "select * from chat_page where img <> 0x00"; 
     var results={};
     pool.getConnection((err,db)=>{
       if(err) throw err;
@@ -82,7 +82,7 @@ export const chatpage = (req, res) => {
 
 export const countryResult = (req, res) => {
     var country_name = req.body.country;
-    var sql = "select * from country_result where addr like '%"+country_name+"%' and img is not null"; 
+    var sql = "select * from country_result where addr like '%"+country_name+"%' and img <> 0x00"; 
     var results;
     pool.getConnection((err,db)=>{
       if(err) throw err;
